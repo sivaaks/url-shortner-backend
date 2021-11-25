@@ -11,14 +11,14 @@ const eventsNotifications=require('./services/eventsNotifications');
 const {authTokenCheck}=require('./shared/auth');
 
 const app= express();
-const PORT=3001;
+//const PORT=3001;
 
 (async()=>{
     try{
         await db.connect();
 
         app.use(cors({
-            origin:['http://localhost:3000']
+            origin:['http://localhost:3000','https://siva-diary-manager.netlify.app/']
         }))
         app.use(express.json());
 
@@ -30,7 +30,8 @@ const PORT=3001;
         app.use('/personal-diary',personalDiaryRoutes);
         app.use('/day-planner',dayPlannerRoutes);
         
-        app.listen(PORT);
+        //app.listen(PORT);
+        app.listen();
 
     } catch(err){
         console.log(`Error: ${err}`);
