@@ -18,7 +18,7 @@ const PORT=3001;
         await db.connect();
 
         app.use(cors({
-            origin:['http://localhost:3000','https://siva-diary-manager.netlify.app/']
+            origin:['http://localhost:3000','https://siva-diary-manager.netlify.app']
         }))
         app.use(express.json());
 
