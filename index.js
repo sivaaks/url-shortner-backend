@@ -11,7 +11,7 @@ const eventsNotifications=require('./services/eventsNotifications');
 const {authTokenCheck}=require('./shared/auth');
 
 const app= express();
-//const PORT=3001;
+const PORT=3001;
 
 (async()=>{
     try{
@@ -30,8 +30,7 @@ const app= express();
         app.use('/personal-diary',personalDiaryRoutes);
         app.use('/day-planner',dayPlannerRoutes);
         
-        //app.listen(PORT);
-        app.listen();
+        app.listen(process.env.PORT||PORT);
 
     } catch(err){
         console.log(`Error: ${err}`);
