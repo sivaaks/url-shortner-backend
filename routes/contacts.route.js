@@ -7,5 +7,6 @@ route.delete('/:id',service.deleteContact);
 route.get('/name',service.getContactIdByName);
 route.get('/',service.getContacts);
 route.get('/names',service.getContactsNameOnly);
+route.get('/id/:id',service.getContactById);
 
 module.exports= route;

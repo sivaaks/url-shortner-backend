@@ -86,8 +86,17 @@ const contactServices= {
         }catch(err){
             console.log(`Error gettings contacts name only ${err}`);
         }
-    }
-    
+    },
+
+    async getContactById(req,res){
+        const {user:{_id}}=getTokenDetails(req.headers.auth);
+        try{
+            const data= await db.contacts.findOne({id:req.params.id,userId:_id},{projection:{name:1,email:1,phone:1}});
+            res.status(200).send(data);
+        }catch(err){
+            console.log(`Error getting contact by id : ${err}`);
+        }
+    },
 
 }
 
