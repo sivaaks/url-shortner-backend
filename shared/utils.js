@@ -8,6 +8,16 @@ const misc={
         const getDateOnly= new Date();
         return `${getDateOnly.getDate()}-${getDateOnly.getMonth()+1}-${getDateOnly.getFullYear()}`;
     },
+    dbDateNow(){
+        const getDateOnly= new Date();
+        return `${getDateOnly.getFullYear()}-${getDateOnly.getMonth()+1}-${getDateOnly.getDate()}`;
+    },
+    dbAddDate(days){
+        const today= new Date();
+        const tommorrow=new Date();
+        tommorrow.setDate(today.getDate()+days)
+        return `${tommorrow.getFullYear()}-${tommorrow.getMonth()+1}-${tommorrow.getDate()}`;
+    },
     timeOnly(){
         const getTimeOnly=new Date();
         return `${getTimeOnly.getHours()}.${getTimeOnly.getMinutes()}`;

@@ -22,9 +22,7 @@ const validate = {
     }),
     addEvent: Joi.object({
         name: Joi.string().required(),
-        date: Joi.string().required(),
-        time: Joi.required(),
-
+        dateTime: Joi.string().required(),
         priority: Joi.string().required(),
         status: Joi.string().required(),
         contact: Joi.string().optional(),
@@ -39,8 +37,7 @@ const validate = {
     }),
     updateEvent: Joi.object({
         name: Joi.string().optional(),
-        date: Joi.string().optional(),
-        time: Joi.required(),
+        dateTime: Joi.string().optional(),
         description: Joi.optional(),
         priority: Joi.string().optional(),
         status: Joi.string().optional(),

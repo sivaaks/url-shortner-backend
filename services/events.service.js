@@ -16,10 +16,10 @@ const events={
             })
             const {user:{_id}}=getTokenDetails(req.headers.auth);
             //check if any event exists in the same date and time
-            const event= await db.events.find({date:value.date,time:value.time,userId:_id}).toArray();
+            const event= await db.events.find({dateTime:value.dateTime,userId:_id}).toArray();
             if(event.length>0) return res.status(200).send('An event already exists in the same date and time');
             else {
-               const data= await db.events.insertOne({...value,createdAt:dateTime,userId:_id});
+               const data= await db.events.insertOne({...value,dateTime:new Date(value.dateTime),createdAt:dateTime,userId:_id});
                return res.status(200).send(data);
             }
         }catch(err){
@@ -89,7 +89,7 @@ const events={
                 message:error.details[0].message,
                 })
             const {user:{_id}}=getTokenDetails(req.headers.auth);
-            const data= await db.events.find({type:value.type,userId:_id}).sort({date:-1}).toArray();
+            const data= await db.events.find({type:value.type,userId:_id}).sort({dateTime:1}).toArray();
             return res.status(200).send(data);
         }catch(err){
             console.log(`Get events by type error: ${err}`);

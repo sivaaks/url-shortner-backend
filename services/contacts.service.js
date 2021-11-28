@@ -6,6 +6,7 @@ const {getTokenDetails}=require('../shared/utils');
 const contactServices= {
 
    async addContact(req,res){
+       console.log('add contact called');
         try{
             const {error,value}= contacts.validate(req.body);
             if(error) return res.status(400).send({
@@ -91,7 +92,7 @@ const contactServices= {
     async getContactById(req,res){
         const {user:{_id}}=getTokenDetails(req.headers.auth);
         try{
-            const data= await db.contacts.findOne({id:req.params.id,userId:_id},{projection:{name:1,email:1,phone:1}});
+            const data= await db.contacts.findOne({_id:ObjectId(req.params.id),userId:_id},{projection:{name:1,email:1,phone:1}});
             res.status(200).send(data);
         }catch(err){
             console.log(`Error getting contact by id : ${err}`);
