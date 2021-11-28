@@ -1,7 +1,7 @@
 const {MongoClient} = require('mongodb');
 
-const DB_URL= 'mongodb://localhost:27017';
-//const DB_URL='mongodb+srv://admin:admin@cluster0.icp5l.mongodb.net/diary-manager?retryWrites=true&w=majority'
+//const DB_URL= 'mongodb://localhost:27017';
+const DB_URL='mongodb+srv://admin:admin@cluster0.icp5l.mongodb.net/diary-manager?retryWrites=true&w=majority'
 const DB_NAME='diary-manager';
 
 const client= new MongoClient(DB_URL);
