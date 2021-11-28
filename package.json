@@ -1,8 +1,8 @@
 {
   "name": "diary-manager",
   "version": "1.0.0",
-  "engines":{
-    "node":"14.15.4"
+  "engines": {
+    "node": "14.15.4"
   },
   "description": "Manage your diary",
   "main": "index.js",
