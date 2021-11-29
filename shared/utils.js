@@ -8,14 +8,14 @@ const misc={
         const getDateOnly= new Date();
         return `${getDateOnly.getDate()}-${getDateOnly.getMonth()+1}-${getDateOnly.getFullYear()}`;
     },
-    dbDateNow(){
-        const getDateOnly= new Date();
+    dbDateNow(date){
+        const getDateOnly= new Date(date);
         return `${getDateOnly.getFullYear()}-${getDateOnly.getMonth()+1}-${getDateOnly.getDate()}`;
     },
-    dbAddDate(days){
-        const today= new Date();
+    dbAddDate(date,days){
+        const today= new Date(date);
         const tommorrow=new Date();
-        tommorrow.setDate(today.getDate()+days)
+        tommorrow.setDate(today.getDate()+days);
         return `${tommorrow.getFullYear()}-${tommorrow.getMonth()+1}-${tommorrow.getDate()}`;
     },
     timeOnly(){

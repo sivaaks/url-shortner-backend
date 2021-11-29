@@ -51,7 +51,7 @@ const events={
                 message:error.details[0].message,
             })
             const {user:{_id}}=getTokenDetails(req.headers.auth);
-            const data= await db.events.findOneAndUpdate({_id:ObjectId(id),userId:_id},{$set:value});
+            const data= await db.events.findOneAndUpdate({_id:ObjectId(id),userId:_id},{$set:{...value,dateTime:new Date(value.dateTime)}});
             return res.status(200).send(data);
         }catch(err){
             console.log(`Error updating ${err}`);
