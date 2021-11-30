@@ -9,7 +9,10 @@ const personalDiaryRoutes= require('./routes/personalDiary.route');
 const dayPlannerRoutes= require('./routes/dayPlanner.route');
 const infoRoutes=require('./routes/info.route');
 const eventsNotifications=require('./services/eventsNotifications');
+const updateEventStatus=require('./services/updateEventStatus');
 const {authTokenCheck}=require('./shared/auth');
+
+const {dbAddTime}=require('./shared/utils');
 
 const app= express();
 const PORT=3001;
@@ -42,6 +45,19 @@ const PORT=3001;
 let checkEvents=setInterval(()=>{
     eventsNotifications.sendEventMail();
 },1800000);
+
+const updateEventStatusInterval=()=>{
+
+}
+
+setInterval(()=>{
+    updateEventStatus.checkAndUpdateEvent();
+},60000)
+
+
+
+
+
 
     // setTimeout(()=>{
     //     clearInterval(checkEvents);

@@ -22,6 +22,22 @@ const misc={
         const getTimeOnly=new Date();
         return `${getTimeOnly.getHours()}.${getTimeOnly.getMinutes()}`;
     },
+    dbAddTime(time,duration){
+
+        const timeGiven=time;
+        const hours= new Date(duration).getHours();
+        const minutes=new Date(duration).getMinutes();
+
+        console.log('hours',hours)
+        console.log('minutes',minutes);
+
+        timeGiven.setHours(timeGiven.getHours()+hours);
+        timeGiven.setMinutes(timeGiven.getMinutes()+minutes);
+
+        return timeGiven;
+
+
+    },
     convertTimeTo12H(time){
         const tempTime= misc.parseTime(time);
         const hours= tempTime[0];
@@ -53,6 +69,13 @@ const misc={
     parseTime(time){
         time=parseFloat(time).toFixed(2);
         let tempTime= time.toString().split('.');
+        tempTime[0]= parseInt(tempTime[0]);
+        tempTime[1]=parseInt(tempTime[1]);
+        return tempTime;
+    },
+    parseDuration(time){
+        time=parseFloat(time).toFixed(2);
+        let tempTime= time.toString().split(':');
         tempTime[0]= parseInt(tempTime[0]);
         tempTime[1]=parseInt(tempTime[1]);
         return tempTime;

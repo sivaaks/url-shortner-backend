@@ -19,7 +19,7 @@ const events={
             const event= await db.events.find({dateTime:value.dateTime,userId:_id}).toArray();
             if(event.length>0) return res.status(200).send('An event already exists in the same date and time');
             else {
-               const data= await db.events.insertOne({...value,dateTime:new Date(value.dateTime),createdAt:dateTime,userId:_id});
+               const data= await db.events.insertOne({...value,dateTime:new Date(value.dateTime),duration:new Date(value.duration),createdAt:dateTime,userId:_id});
                return res.status(200).send(data);
             }
         }catch(err){
@@ -112,9 +112,9 @@ const events={
     },
 
     async statusUpdate(req,res){
-   
+        const {user:{_id}}=getTokenDetails(req.headers.auth);
         try{
-            const data=await db.events.findOneAndUpdate({_id:ObjectId(req.query.id),userId:req.query.userId},{$set:{status:req.query.status}});
+            const data=await db.events.findOneAndUpdate({_id:ObjectId(req.query.id),userId:_id},{$set:{status:req.query.status}});
             console.log(data.lastErrorObject.updatedExisting);
             return res.status(200).send('Updated event status');
         }catch(err){
