@@ -95,6 +95,22 @@ const events={
             console.log(`Get events by type error: ${err}`);
         }
     },
+
+    async getEventsByMonth(req,res){
+        try{
+            // const {error,value}= getEventsByType.validate({type:req.params.type});
+            // if(error) return res.status(400).send({
+            //     error:'Validation error',
+            //     message:error.details[0].message,
+            //     })
+            const {user:{_id}}=getTokenDetails(req.headers.auth);
+            const data= await db.events.find({userId:_id}).sort({dateTime:1}).toArray();
+            return res.status(200).send(data);
+        }catch(err){
+            console.log(`Get events by type error: ${err}`);
+        }
+    },
+
     async statusUpdate(req,res){
    
         try{

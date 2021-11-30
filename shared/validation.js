@@ -59,7 +59,7 @@ const validate = {
         name: Joi.string().min(1).required(),
     }),
     personalDiary: Joi.object({
-        date: Joi.string().length(10).required(),
+        date: Joi.string().required(),
         content: Joi.string().min(10).max(255).required(),
     })
 }

@@ -1,9 +1,8 @@
 const db= require('../shared/db.connect');
 const {ObjectId} = require('mongodb');
 const {dateTime,dateOnly,getTokenDetails,dbDateNow,dbAddDate} = require('../shared/utils');
-const {personalDiary}= require('../shared/validation');
 
-const personalDiaryServices={
+const infoServices={
 
     async writeDiary(req,res){
         const {user:{_id}}=getTokenDetails(req.headers.auth);
@@ -41,22 +40,31 @@ const personalDiaryServices={
         }
     },
 
-    async getDiary(req,res){
+    async getInfo(req,res){
         const {user:{_id}}=getTokenDetails(req.headers.auth);
         try{
-            const date= req.query.date;
-            //const {error,value}= personalDiary.validate(req.body);
-            //if(error) return res.status(400).send(error.details[0].message);
-            //if(id.length<24) return res.status(400).send('Invalid ID');
-            const data= await db.personalDiary.findOne({date:date,userId:_id},{projection:{content:1}});
-            //const data= await db.personalDiary.findOne({date:ObjectId(id),userId:_id},{projection:{date:1}});
-            //if(data.date!==dateOnly()) return res.status(403).send('This diary content cannot be edited now as the day has passed by')
+            const data= await db.events.aggregate([
+                { $match:{userId:_id}},
+                {"$group" : {_id:"$type", count:{$sum:1}}}
+            ]).sort({_id:1}).toArray();
+            const contacts= await db.contacts.count({userId:_id});
+            data.push({_id:'contact',count:contacts});
+            data.map((event,index)=>{
+               data[index]={...event,color:infoServices.getColor(event._id)}
+            })
             return res.status(200).send(data);
         }catch(err){
-            console.log(`Edit diary error ${err}`);
+            console.log(`Get info error ${err}`);
         }
+    },
+
+    getColor(type){
+        if (type==='appointment') return 'green'
+        if (type==='event') return 'red'
+        if (type==='meeting') return 'violet'
+        if (type==='contact') return 'crimson'
     }
 
 }
 
-module.exports= personalDiaryServices;
+module.exports= infoServices;

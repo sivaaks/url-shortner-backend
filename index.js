@@ -7,6 +7,7 @@ const eventsRoute= require('./routes/events.route');
 const contactsRoute= require('./routes/contacts.route');
 const personalDiaryRoutes= require('./routes/personalDiary.route');
 const dayPlannerRoutes= require('./routes/dayPlanner.route');
+const infoRoutes=require('./routes/info.route');
 const eventsNotifications=require('./services/eventsNotifications');
 const {authTokenCheck}=require('./shared/auth');
 
@@ -29,6 +30,7 @@ const PORT=3001;
         app.use('/contacts',contactsRoute);
         app.use('/personal-diary',personalDiaryRoutes);
         app.use('/day-planner',dayPlannerRoutes);
+        app.use('/info',infoRoutes);
         
         app.listen(process.env.PORT||PORT);
 

@@ -7,6 +7,7 @@ route.put('/:id',service.updateEvent);
 route.get('/',service.getEvents);
 route.get('/:id',service.getEventById);
 route.get('/type/:type',service.getEventsByType);
+route.get('/calendar/all',service.getEventsByMonth);
 route.patch('/status',service.statusUpdate);
 
 module.exports= route;

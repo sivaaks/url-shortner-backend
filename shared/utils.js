@@ -10,7 +10,7 @@ const misc={
     },
     dbDateNow(date){
         const getDateOnly= new Date(date);
-        return `${getDateOnly.getFullYear()}-${getDateOnly.getMonth()+1}-${getDateOnly.getDate()}`;
+        return `${getDateOnly.getFullYear()}-${(getDateOnly.getMonth()+1).toString().padStart(2,'0')}-${getDateOnly.getDate().toString().padStart(2,'0')}`;
     },
     dbAddDate(date,days){
         const today= new Date(date);
