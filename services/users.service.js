@@ -60,7 +60,7 @@ const service={
             const authToken = jwt.sign(
                 {user:{userEmail:user.email,_id:user._id}},
                 JWT_SECRET,
-                {expiresIn:'5m'},
+                {expiresIn:'8h'},
                 );
                 res.status(200).send({authToken});
         }catch(err){
