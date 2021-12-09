@@ -6,6 +6,6 @@ route.post('/register',service.registerUser);
 route.post('/login',service.loginUser);
 route.post('/forgot-password',service.forgotPassword);
 route.get('/verify/:token',service.verifyUser);
-route.get('/reset-password/:token',service.resetPassword);
+route.post('/reset-password/:token',service.resetPassword);
 
 module.exports= route;

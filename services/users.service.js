@@ -99,17 +99,21 @@ const service={
                 message:error.details[0].message,
             })
 
-            const user= await db.users.find({email:req.body.email});
+            const user= await db.users.findOne({email:req.body.email});
             if(!user) return res.status(400).send('Email not found');
 
             await db.users.findOneAndUpdate({email:req.body.email},{$set:{resetToken:verifyToken}});
-            res.status(201).send(verifyToken);
+            res.status(200).send('Email sent');
+            await service.sendForgotPasswordEmail(req.body.email,verifyToken);
         }catch(err){
             console.log(`Forgot password error ${err}`);
         }
     },
 
     async resetPassword(req,res){
+
+        console.log('reset pass',req.body);
+        console.log('reset token',req.params.token);
 
         try {
             const token = req.params.token;
@@ -137,6 +141,14 @@ const service={
         const mailRes= await sendMail(to,'Verify your email address','',`
         <h2>Verify your email address by clicking on the link below</h2><br/>
         <a href=${verifyLink}>Click on this link to verify your email address</a>`);
+        console.log(mailRes);
+    },
+
+    async sendForgotPasswordEmail(to,token){
+        const verifyLink=`http://localhost:3001/users/reset-password/${token}`;
+        const mailRes= await sendMail(to,'Reset password','',`
+        <h2>Reset your password by clicking on the link below</h2><br/>
+        <a href=${verifyLink}>Click on this link to reset your password</a>`);
         console.log(mailRes);
     }
 

@@ -4,6 +4,9 @@ const jwt= require('jsonwebtoken');
 const misc={
     dateTime: new Date().toString('dd-MM-yyyy hh:mm:ss'),
     verifyToken:crypto.randomBytes(16).toString('hex'),
+    randomString(){
+       return crypto.randomBytes(2).toString('hex')
+    },
     dateOnly(){
         const getDateOnly= new Date();
         return `${getDateOnly.getDate()}-${getDateOnly.getMonth()+1}-${getDateOnly.getFullYear()}`;
