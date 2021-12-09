@@ -137,7 +137,7 @@ const service={
     },
 
     async sendVerificationEmail(to,token){
-        const verifyLink=`http://localhost:3001/users/verify/${token}`;
+        const verifyLink=`https://siva-url-shortner.herokuapp.com/users/verify/${token}`;
         const mailRes= await sendMail(to,'Verify your email address','',`
         <h2>Verify your email address by clicking on the link below</h2><br/>
         <a href=${verifyLink}>Click on this link to verify your email address</a>`);
@@ -145,7 +145,7 @@ const service={
     },
 
     async sendForgotPasswordEmail(to,token){
-        const verifyLink=`http://localhost:3001/users/reset-password/${token}`;
+        const verifyLink=`https://siva-url-shortner.herokuapp.com/users/reset-password/${token}`;
         const mailRes= await sendMail(to,'Reset password','',`
         <h2>Reset your password by clicking on the link below</h2><br/>
         <a href=${verifyLink}>Click on this link to reset your password</a>`);
